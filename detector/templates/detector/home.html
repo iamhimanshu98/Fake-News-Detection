@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detector</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'detector/style.css' %}">
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/alert-triangle.svg" alt="Warning"
+                    class="icon warning-icon">
+                <h1>Fake News Detector</h1>
+            </div>
+
+            <form id="news-form" class="form">
+                <div class="textarea-container">
+                    <textarea id="news-text" placeholder="Enter news text to check its credibility..." maxlength="1000"
+                        required></textarea>
+                    <div class="char-count">0/1000</div>
+                </div>
+
+                <button type="submit" class="submit-button">
+                    <span>Check Credibility</span>
+                    <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/send.svg" alt="Send"
+                        class="icon send-icon">
+                </button>
+            </form>
+
+            <div class="result">
+                <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/help-circle.svg" alt="Help"
+                    class="icon help-icon">
+                <p>Submit news text for analysis</p>
+            </div>
+
+            <div class="disclaimer">
+                <p>This is a demonstration tool and should not be used as the sole determinant of news credibility.</p>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'detector/script.js' %}"></script>
+</body>
+
+</html>

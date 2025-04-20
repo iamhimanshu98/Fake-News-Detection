@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+*.pyo
+
+# Django specific
+*.log
+local_settings.py
+db.sqlite3
+media/
+.env
+
+fakenews_project/__pycache__/
+detector/__pycache__/
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# IDE/editor stuff
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Static and compiled files
+staticfiles/
+static_root/
+node_modules/
+
+# Migrations (optional if you want to recreate them)
+# Uncomment below to exclude
+# */migrations/*.py
+# */migrations/*.pyc
