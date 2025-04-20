@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fake News Detector</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'detector/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'detector/style.css' %}">
 </head>
 
 
@@ -20,11 +20,12 @@
                 <h1>Fake News Detector</h1>
             </div>
 
-            <form id="news-form" class="form">
+            <form id="news-form" class="form" method="post">
+                {% csrf_token %}
                 <div class="textarea-container">
-                    <textarea id="news-text" placeholder="Enter news text to check its credibility..." maxlength="1000"
+                    <textarea rows="10" id="news-text" placeholder="Enter news text to check its credibility..." maxlength="2000"
                         required></textarea>
-                    <div class="char-count">0/1000</div>
+                    <div class="char-count">0/2000</div>
                 </div>
 
                 <button type="submit" class="submit-button">
@@ -37,7 +38,7 @@
             <div class="result">
                 <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/help-circle.svg" alt="Help"
                     class="icon help-icon">
-                <p>Submit news text for analysis</p>
+                <p id="prediction">Submit news text for analysis</p>
             </div>
 
             <div class="disclaimer">
