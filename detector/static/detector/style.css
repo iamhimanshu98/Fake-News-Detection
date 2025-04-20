@@ -94,7 +94,7 @@ textarea::placeholder {
 .char-count {
   position: absolute;
   bottom: 0.5rem;
-  right: 0.75rem;
+  right: .8rem;
   font-size: 0.75rem;
   color: #93c5fd;
 }
