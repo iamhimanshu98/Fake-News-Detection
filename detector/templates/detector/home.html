@@ -6,58 +6,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fake News Detector</title>
+    <link rel="icon" type="image/png" href="{% static 'images/favicon2.png' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_upward" />
     <link rel="stylesheet" type="text/css" href="{% static 'detector/style.css' %}">
 </head>
 
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="header">
-                <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/alert-triangle.svg" alt="Warning"
-                    class="icon warning-icon">
-                <h1>Fake News Detector</h1>
-            </div>
-
-            <form id="news-form" class="form" method="post">
-                {% csrf_token %}
-                <div class="textarea-container">
-                    <textarea rows="10" id="news-text" placeholder="Enter news text to check its credibility..." maxlength="2000"
-                        required></textarea>
-                    <div class="char-count">0/2000</div>
+    <div class="main-layout">
+        <!-- Left: Form Section -->
+        <div class="detector-card">
+            <div class="card">
+                <div class="header">
+                    <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/alert-triangle.svg" alt="Warning"
+                        class="icon warning-icon">
+                    <h1>Fake News Detector</h1>
                 </div>
 
-                <button type="submit" class="submit-button">
-                    <span>Check Credibility</span>
-                    <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/send.svg" alt="Send"
-                        class="icon send-icon">
-                </button>
-            </form>
+                <form id="news-form" class="form" method="post">
+                    {% csrf_token %}
+                    <div class="textarea-container">
+                        <textarea rows="12" id="news-text" placeholder="Enter news text to check its credibility..."
+                            maxlength="2000" required></textarea>
+                        <div class="char-count">0/2000</div>
+                    </div>
 
-            <div class="result">
-                <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/help-circle.svg" alt="Help"
-                    class="icon help-icon">
-                <p id="prediction">Submit news text for analysis</p>
-            </div>
+                    <div class="result">
+                        <!-- <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/help-circle.svg" alt="Help" class="icon help-icon"> -->
+                        <p id="prediction">Submit news text for analysis</p>
+                    </div>
 
-            <div class="disclaimer">
-                <p>This is a demonstration tool and should not be used as the sole determinant of news credibility.</p>
+                    <button type="submit" class="submit-button">
+                        <span>Check</span>
+                        <span class="material-symbols-outlined">
+                            arrow_upward
+                        </span>
+                    </button>
+                </form>
+
+
+                <div class="disclaimer">
+                    <p>This is a demonstration tool and should not be used as the sole determinant of news credibility.
+                    </p>
+                </div>
             </div>
         </div>
 
-        <div class="sample-news-section">
+        <!-- Right: Sample News Section -->
+        <div class="sample-news-section scrollable-news">
             <h2>Try These News Examples</h2>
             <div class="news-grid">
                 {% for news in sample_news %}
                 <div class="news-card">
-                    <button class="copy-button" onclick="copyToClipboard(`{{ news.text|escapejs }}`)">Copy</button>
                     <p class="news-text">{{ news.text }}</p>
+                    <button class="copy-button"
+                        onclick="copyToClipboard(`{{ news.text|escapejs }}`, this)">Copy</button>
                 </div>
                 {% endfor %}
             </div>
-        </div>        
-        
+        </div>
     </div>
+
     <script src="{% static 'detector/script.js' %}"></script>
 </body>
 

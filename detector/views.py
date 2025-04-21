@@ -1,53 +1,48 @@
 import joblib
 from django.shortcuts import render
 from django.http import JsonResponse
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import make_pipeline
 import os
 
-# Load the model (make sure the path to your model is correct)
+# Load the model (ensure this path points to your new model)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "..", "model", "fake_news_model.pkl")
+MODEL_PATH = os.path.join(BASE_DIR, "..", "model", "model_logistic.pkl")
 
 model = joblib.load(MODEL_PATH)
 
 def predict_fake_news(news_text):
-    """Predict whether the given text is fake or real"""
-    prediction = model.predict([news_text])  
+    prediction = model.predict([news_text])
     return prediction[0]
 
 def home(request):
     """Home page view with sample news"""
     sample_news = [
-    {"text": "NASA's James Webb Telescope Captures Stunning Nebula Image."},  # real
-    {"text": "Government Announces New Education Policy."},  # real
-    {"text": "Breaking: Alien Megastructure Detected Orbiting Distant Star."},  # fake
-    {"text": "Scientists Create Real-Life Jurassic Park."},  # fake
-    {"text": "India Successfully Launches Communication Satellite."},  # real
-    {"text": "UN Declares Earth Will Be Destroyed by Asteroid Next Week."},  # fake
-    {"text": "Breakthrough in Fusion Energy Research Announced."},  # real
-    {"text": "FIFA Bans Use of Magic in World Cup Matches."},  # fake
-    {"text": "Global Vaccination Campaign Targets Measles Outbreak."},  # real
-    {"text": "Giant Monster Emerges from Deep Sea Trench."},  # fake
-    {"text": "Nobel Prize in Physics Awarded for Groundbreaking Laser Technology."},  # real
-    {"text": "World Leaders Secretly Meet with Extraterrestrials."},  # fake
-    {"text": "SpaceX Launches Crewed Mission to the ISS."},  # real
-    {"text": "Scientists Discover Teleportation Technology."},  # fake
-    {"text": "International Trade Agreement Signed by Major Economies."}  # real
+        {"text": "PM Modi Addresses Nation on Economic Reforms."},  # real
+        {"text": "Government Announces New Education Policy."},  # real
+        {"text": "NASA Announces Discovery of Ancient City on Mars."},  # fake
+        {"text": "WhatsApp Message Claims Aadhaar Not Needed for Bank Accounts."},  # fake
+        {"text": "India Successfully Launches Communication Satellite."},  # real
+        {"text": "₹10 Coins Are No Longer Legal Tender."},  # fake
+        {"text": "IIT Bombay Develops Low-Cost COVID-19 Testing Kit."},  # real
+        {"text": "Drinking Cow Urine Cures COVID-19, Claims Hindu Leader."},  # fake
+        {"text": "Supreme Court Adjourns Hearing on Ayodhya Land Dispute."},  # real
+        {"text": "RBI Planning to Replace ₹100 Notes with Plastic Coins."},  # fake
+        {"text": "Kerala Launches Statewide Organic Farming Drive."},  # real
+        {"text": "Viral Video Shows Muslims Attacking Hindu Temple."},  # fake
+        {"text": "Global Vaccination Campaign Targets Measles Outbreak."},  # real
+        {"text": "UN Declares Earth Will Be Destroyed by Asteroid Next Week."},  # fake
+        {"text": "Traditional Art Form of Madhubani Gains Global Recognition."}  # real
     ]
+
     return render(request, 'detector/home.html', {'sample_news': sample_news})
 
-
 def predict(request):
-    """Predict view"""
+    """Prediction API endpoint"""
     if request.method == "POST":
         news_text = request.POST.get('news_text')
         if news_text:
             prediction = predict_fake_news(news_text)
-            result = "FAKE" if prediction == 0 else "REAL"
+            result = "FAKE" if prediction == 1 else "REAL"
             return JsonResponse({'prediction': result})
         else:
             return JsonResponse({'error': 'No text provided'}, status=400)
     return JsonResponse({'error': 'Invalid request method'}, status=405)
-

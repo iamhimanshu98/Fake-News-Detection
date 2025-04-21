@@ -1,9 +1,14 @@
 // Get CSRF token from the cookie or HTML
 const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
 
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text).catch(err => {
-    console.error("Failed to copy: ", err);
+function copyToClipboard(text, button = null) {
+  navigator.clipboard.writeText(text).then(() => {
+      if (button) {
+          button.classList.add('copied');
+          setTimeout(() => {
+              button.classList.remove('copied');
+          }, 1500);
+      }
   });
 }
 
