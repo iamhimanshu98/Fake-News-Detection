@@ -1,15 +1,35 @@
 // Get CSRF token from the cookie or HTML
 const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
 
-function copyToClipboard(text, button = null) {
+function copyToClipboard(text, triggerElement = null) {
   navigator.clipboard.writeText(text).then(() => {
-      if (button) {
-          button.classList.add('copied');
-          setTimeout(() => {
-              button.classList.remove('copied');
-          }, 1500);
-      }
+    let copyBtn = triggerElement?.closest(".news-card")?.querySelector(".copy-button");
+
+    if (copyBtn) {
+      const originalText = copyBtn.innerText;
+      copyBtn.innerText = "Copied!";
+      copyBtn.disabled = true;
+
+      setTimeout(() => {
+        copyBtn.innerText = originalText;
+        copyBtn.disabled = false;
+      }, 1000);
+    }
   });
+}
+
+const textarea = document.getElementById("news-text");
+const charCount = document.querySelector(".char-count");
+
+textarea.addEventListener("input", () => {
+  charCount.textContent = `${textarea.value.length}/2000`;
+});
+
+
+function clearInput() {
+  document.getElementById("news-text").value = "";
+  document.querySelector(".char-count").innerText = "0/2000";
+  document.getElementById("prediction").innerText = "Submit news for analysis";
 }
 
 // Listen to form submission and prevent the default action
@@ -33,13 +53,22 @@ document.getElementById("news-form").addEventListener("submit", function (e) {
       return response.json();
     })
     .then((data) => {
+      const predictionEl = document.getElementById("prediction");
+    
       if (data.prediction) {
-        document.getElementById("prediction").innerText = data.prediction;
+        const predictionText = data.prediction.trim().toLowerCase();
+    
+        if (predictionText === "real") {
+          predictionEl.innerHTML = `<span class="green-text">Real News</span>`;
+        } else if (predictionText === "fake") {
+          predictionEl.innerHTML = `<span class="red-text">Fake News</span>`;
+        } else {
+          predictionEl.innerHTML = `<span class="status-icon">❓</span> ${data.prediction}`;
+        }
       } else {
-        document.getElementById("prediction").innerText =
-          "Error: " + data.error;
+        predictionEl.innerText = "Error: " + data.error;
       }
-    })
+    })    
     .catch((error) => {
       console.error("Error:", error);
       document.getElementById("prediction").innerText =

@@ -34,15 +34,17 @@
 
                     <div class="result">
                         <!-- <img src="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/help-circle.svg" alt="Help" class="icon help-icon"> -->
-                        <p id="prediction">Submit news text for analysis</p>
+                        <p id="prediction">Submit news for analysis</p>
                     </div>
 
-                    <button type="submit" class="submit-button">
-                        <span>Check</span>
-                        <span class="material-symbols-outlined">
-                            arrow_upward
-                        </span>
-                    </button>
+                    <div class="button-row">
+                        <button type="button" class="clear-button" onclick="clearInput()">Clear</button>
+                        <button type="submit" class="submit-button">
+                            <span>Check</span>
+                            <span class="material-symbols-outlined">arrow_upward</span>
+                        </button>
+                    </div>
+                    
                 </form>
 
 
@@ -59,10 +61,10 @@
             <div class="news-grid">
                 {% for news in sample_news %}
                 <div class="news-card">
-                    <p class="news-text">{{ news.text }}</p>
-                    <button class="copy-button"
-                        onclick="copyToClipboard(`{{ news.text|escapejs }}`, this)">Copy</button>
-                </div>
+                    <p class="news-text" onclick="copyToClipboard(`{{ news.text|escapejs }}`, this)">{{ news.text }}</p>
+                    <button class="copy-button" onclick="copyToClipboard(`{{ news.text|escapejs }}`, this)">Copy</button>
+                  </div>
+                  
                 {% endfor %}
             </div>
         </div>

@@ -3,7 +3,6 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import os
 
-# Load the model (ensure this path points to your new model)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "..", "model", "model_logistic.pkl")
 
@@ -23,9 +22,7 @@ def home(request):
         {"text": "India Successfully Launches Communication Satellite."},  # real
         {"text": "₹10 Coins Are No Longer Legal Tender."},  # fake
         {"text": "IIT Bombay Develops Low-Cost COVID-19 Testing Kit."},  # real
-        {"text": "Drinking Cow Urine Cures COVID-19, Claims Hindu Leader."},  # fake
         {"text": "Supreme Court Adjourns Hearing on Ayodhya Land Dispute."},  # real
-        {"text": "RBI Planning to Replace ₹100 Notes with Plastic Coins."},  # fake
         {"text": "Kerala Launches Statewide Organic Farming Drive."},  # real
         {"text": "Viral Video Shows Muslims Attacking Hindu Temple."},  # fake
         {"text": "Global Vaccination Campaign Targets Measles Outbreak."},  # real

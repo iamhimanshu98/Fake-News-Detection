@@ -246,6 +246,57 @@ textarea::placeholder {
   font-weight: 100;
 }
 
+.button-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.green-text {
+  color: #86efac; /* light green */
+  font-weight: 600;
+}
+
+.red-text {
+  color: #fca5a5; /* light red */
+  font-weight: 600;
+}
+
+.status-icon {
+  font-size: 1.4rem;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+.clear-button {
+  padding: 0.75rem 3rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: #e0e7ff;
+  border: 1px solid rgba(99, 102, 241, 0.5);
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.news-text {
+  flex: 1;
+  margin-right: 1rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.clear-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.clear-button:active {
+  transform: scale(0.97);
+}
+
+
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .main-layout {
