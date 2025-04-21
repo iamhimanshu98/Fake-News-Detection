@@ -147,6 +147,57 @@ textarea::placeholder {
   color: rgba(199, 210, 254, 0.5);
 }
 
+.sample-news-section {
+  margin-top: 2rem;
+}
+
+.sample-news-section h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #c7d2fe;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.news-card {
+  background-color: rgba(79, 70, 229, 0.2);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  position: relative;
+  color: #e0e7ff;
+}
+
+.news-text {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.copy-button {
+  padding: 0.35rem 0.75rem;
+  background: rgba(99, 102, 241, 0.8);
+  color: #fff;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  
+  cursor: pointer;
+}
+
+.copy-button:hover {
+  background: rgba(99, 102, 241, 1);
+}
+
+@media (max-width: 640px) {
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @keyframes fadeIn {
   from {
       opacity: 0;

@@ -44,6 +44,19 @@
                 <p>This is a demonstration tool and should not be used as the sole determinant of news credibility.</p>
             </div>
         </div>
+
+        <div class="sample-news-section">
+            <h2>Try These News Examples</h2>
+            <div class="news-grid">
+                {% for news in sample_news %}
+                <div class="news-card">
+                    <button class="copy-button" onclick="copyToClipboard(`{{ news.text|escapejs }}`)">Copy</button>
+                    <p class="news-text">{{ news.text }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>        
+        
     </div>
     <script src="{% static 'detector/script.js' %}"></script>
 </body>

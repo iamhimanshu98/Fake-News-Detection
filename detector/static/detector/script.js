@@ -1,6 +1,12 @@
 // Get CSRF token from the cookie or HTML
 const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
 
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).catch(err => {
+    console.error("Failed to copy: ", err);
+  });
+}
+
 // Listen to form submission and prevent the default action
 document.getElementById("news-form").addEventListener("submit", function (e) {
   e.preventDefault(); // Prevent the form from submitting the traditional way
