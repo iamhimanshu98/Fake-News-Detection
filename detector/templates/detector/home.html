@@ -15,7 +15,6 @@
 
 <body>
     <div class="main-layout">
-        <!-- Left: Form Section -->
         <div class="detector-card">
             <div class="card">
                 <div class="header">
@@ -44,7 +43,7 @@
                             <span class="material-symbols-outlined">arrow_upward</span>
                         </button>
                     </div>
-                    
+
                 </form>
 
 
@@ -55,16 +54,16 @@
             </div>
         </div>
 
-        <!-- Right: Sample News Section -->
         <div class="sample-news-section scrollable-news">
             <h2>Try These News Examples</h2>
             <div class="news-grid">
                 {% for news in sample_news %}
                 <div class="news-card">
                     <p class="news-text" onclick="copyToClipboard(`{{ news.text|escapejs }}`, this)">{{ news.text }}</p>
-                    <button class="copy-button" onclick="copyToClipboard(`{{ news.text|escapejs }}`, this)">Copy</button>
-                  </div>
-                  
+                    <button class="copy-button"
+                        onclick="copyToClipboard(`{{ news.text|escapejs }}`, this)">Copy</button>
+                </div>
+
                 {% endfor %}
             </div>
         </div>
